@@ -1,0 +1,26 @@
+services:
+  app:
+    image: node
+    working_dir: /app
+    user: "${APP_USER_ID}"
+    volumes:
+      - ./:/app
+    ports:
+      - 3000:3000
+    entrypoint: npm run start:dev
+    environment:
+      - TZ=Europe/Moscow
+
+  cli:
+    image: node
+    working_dir: /app
+    user: "${APP_USER_ID}"
+    volumes:
+      - ./:/app
+    stdin_open: true
+    tty: true
+    entrypoint: bash
+    profiles:
+      - donotstart
+    environment:
+      - TZ=Europe/Moscow
